@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Document</title>
 </head>
 
@@ -12,7 +13,7 @@
     <header>
         <div class="flex justify-around mt-6">
             <h1>TASK MANAGMENT</h1>
-            <input type="text" class="border rounded-lg px-4 py-2" placeholder="Rechercher une tâche...">
+            <input type="text" class="border rounded-lg px-4 py-2" placeholder="Rechercher une tâche..." id="search">
         </div>
     </header>
     <main>
@@ -23,11 +24,16 @@
                 <option value="medium">medium</option>
                 <option value="high">high</option>
             </select>
-        </section> 
+        </section>
 
         <section class="flex justify-center items-center mt-6">
-            <div class="bg-[#D02752] p-6 w-7xl  rounded-lg text-white flex justify-around items-center">
-                il y'a un erreur dans le server <button class="border p-2 rounded-lg bg-[#FBF6F6] text-black">reessyer</button>
+            <div
+                class="bg-red border border-red-300 p-6 w-7xl rounded-lg text-red-700 flex justify-around items-center">
+                Il y'a une erreur dans le serveur
+
+                <button class="border p-2 rounded-lg bg-white text-red-700 px-4">
+                    <i class="fa-solid fa-rotate-right"></i> Réessayer
+                </button>
             </div>
         </section>
 
@@ -37,23 +43,23 @@
                 <h2 class="text-xl font-bold text-gray-800 border border-white-500 text-center rounded-lg bg-white">
                     À faire
                 </h2>
-                   <div id="todo"></div>
+                <div id="todo"></div>
             </div>
 
-             <div class="bg-[#FB6C00] rounded-xl p-4 w-80 min-h-96">
+            <div class="bg-[#FB6C00] rounded-xl p-4 w-80 min-h-96">
 
                 <h2 class="text-xl font-bold text-gray-800 border border-white-500 text-center rounded-lg bg-white">
-                   En cours
+                    En cours
                 </h2>
-                   <div id="in-progress"></div>
+                <div id="in-progress"></div>
             </div>
 
-              <div class="bg-[#7EC151] rounded-xl p-4 w-80 min-h-96">
+            <div class="bg-[#7EC151] rounded-xl p-4 w-80 min-h-96">
 
                 <h2 class="text-xl font-bold text-gray-800 border border-white-500 text-center rounded-lg bg-white">
                     À Valider
                 </h2>
-                   <div id="done"></div>
+                <div id="done"></div>
             </div>
         </section>
     </main>
