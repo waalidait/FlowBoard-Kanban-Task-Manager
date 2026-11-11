@@ -82,12 +82,20 @@ function filter() {
 
     selcect.addEventListener("change", function () {
         let value = selcect.value
-
-        let filter = product.filter(element => {
+        if(value === ""){
+            affichertask(product)
+        }
+        else{
+           let filter = product.filter(element => {
             return element.priority === value
         })
-
+        
         affichertask(filter)
+        }
+        
+
+         
     })
 }
 filter()
+
