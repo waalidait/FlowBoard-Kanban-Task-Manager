@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dist/output.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="flex justify-around mt-6">
+            <h1>TASK MANAGMENT</h1>
+            <input type="text" class="border rounded-lg px-4 py-2" placeholder="Rechercher une tâche...">
+        </div>
+    </header>
+    <main>
+        <section class="mt-6">
+            <select class="border rounded-lg px-4 py-2 block mx-auto" id="select">
+                <option value="">Toutes les priorités</option>
+                <option value="low">low</option>
+                <option value="medium">medium</option>
+                <option value="high">high</option>
+            </select>
+        </section> 
+
+        <section class="flex justify-center items-center mt-6">
+            <div class="bg-[#D02752] p-6 w-7xl  rounded-lg text-white flex justify-around items-center">
+                il y'a un erreur dans le server <button class="border p-2 rounded-lg bg-[#FBF6F6] text-black">reessyer</button>
+            </div>
+        </section>
+
+        <section class="p-6 flex justify-evenly">
+            <div class="bg-[#60C1E5] rounded-xl p-4 w-80 min-h-96">
+
+                <h2 class="text-xl font-bold text-gray-800 border border-white-500 text-center rounded-lg bg-white">
+                    À faire
+                </h2>
+                   <div id="todo"></div>
+            </div>
+
+             <div class="bg-[#FB6C00] rounded-xl p-4 w-80 min-h-96">
+
+                <h2 class="text-xl font-bold text-gray-800 border border-white-500 text-center rounded-lg bg-white">
+                   En cours
+                </h2>
+                   <div id="in-progress"></div>
+            </div>
+
+              <div class="bg-[#7EC151] rounded-xl p-4 w-80 min-h-96">
+
+                <h2 class="text-xl font-bold text-gray-800 border border-white-500 text-center rounded-lg bg-white">
+                    À Valider
+                </h2>
+                   <div id="done"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/ui.js" type="module"></script>
+</body>
+
+</html>
