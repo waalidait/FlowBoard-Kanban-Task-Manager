@@ -42,7 +42,7 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
-prp.className = "bg-yellow-500 text-white rounded-lg px-3 py-1 w-24 text-center"
+            prp.className = "bg-yellow-500 text-white rounded-lg px-3 py-1 w-24 text-center"
             let desc = document.createElement("p")
             desc.textContent = element.description
 
