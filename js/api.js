@@ -1,24 +1,24 @@
- export function fetchapi(){
-     return fetch('https://flowbard-api-virid.vercel.app/cards')
-     .then(result => result.json())
- }
+export function fetchapi(priority = "", assignee = "", search = "") {
+    let parametre = new URLSearchParams()
 
-// let todo = document.querySelector('#todo');
+    if (priority !== "") {
+        parametre.append("priority", priority)
+    }
 
-// fetch('https://flowboard-api-virid.vercel.app/cards')
-// .then(result => result.json())
-// .then(produit => {
+    if (assignee !== "") {
+        parametre.append("assignee", assignee)
+    }
 
-//    let card = produit.filter(item => item.priority=== "low");
-//    console.log(card)
-//         todo.innerHTML += `
-//     card.forEach(item => {
-//             <div class="bg-white rounded-xl p-4 mt-8">
+    if (search !== "") {
+        parametre.append("q", search)
+    }
 
-//                 <h3>${item.title}</h3>
-//                 <p>${item.description}</p>
-//             </div>
-//         `;
-//     });
-
-// });
+    return fetch("https://flowboard-api-virid.vercel.app/cards?" + parametre)
+        .then(result => {
+            if (!result.ok) {
+                throw new Error("Erreur serveur")
+            }
+            return result.json()
+        })
+        
+}

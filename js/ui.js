@@ -1,10 +1,25 @@
 import { fetchapi } from "./api.js";
 let product = []
-fetchapi().then(data => {
-    product = data;
-    console.log(data)
-    affichertask(product)
-})
+
+let select = document.querySelector("#select")
+let input = document.querySelector("#search")
+let error = document.querySelector("#erreur")
+function getdata() {
+    fetchapi(select.value, "", input.value)
+        .then(data => {
+            product = data
+            affichertask(product)
+            error.classList.add("hidden")
+        })
+        .catch(err => {
+            error.classList.remove("hidden")
+        })
+}
+getdata()
+select.addEventListener("change", getdata)
+
+input.addEventListener("input", getdata)
+
 let todo = document.querySelector("#todo")
 let progress = document.querySelector("#in-progress")
 let done = document.querySelector("#done")
@@ -13,7 +28,7 @@ let done = document.querySelector("#done")
 
 function affichertask(data) {
 
-     todo.replaceChildren();
+    todo.replaceChildren();
     progress.replaceChildren();
     done.replaceChildren();
 
@@ -27,7 +42,7 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
-
+prp.className = "bg-yellow-500 text-white rounded-lg px-3 py-1 w-24 text-center"
             let desc = document.createElement("p")
             desc.textContent = element.description
 
@@ -46,7 +61,7 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
-
+            prp.className = "bg-red-500 text-white rounded-lg px-3 py-1 w-24 text-center"
             let desc = document.createElement("p")
             desc.textContent = element.description
 
@@ -65,11 +80,11 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
-
+            prp.className = "bg-green-400 text-black rounded-lg px-3 py-1 w-24 text-center"
             let desc = document.createElement("p")
             desc.textContent = element.description
 
-             card.appendChild(prp)
+            card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
             done.appendChild(card)
@@ -77,25 +92,26 @@ function affichertask(data) {
     });
 }
 
-function filter() {
-    let selcect = document.querySelector("#select")
 
-    selcect.addEventListener("change", function () {
-        let value = selcect.value
-        if(value === ""){
-            affichertask(product)
-        }
-        else{
-           let filter = product.filter(element => {
-            return element.priority === value
-        })
-        
-        affichertask(filter)
-        }
-        
 
-         
-    })
-}
-filter()
 
+let form = document.querySelector("#form-card")
+
+
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let newcard = {
+        title: document.querySelector('#title').value,
+        description: document.querySelector('#desc').value,
+        priority: document.querySelector('#Priority').value,
+        name: document.querySelector('#name').value,
+        status: "todo"
+
+    };
+
+    product.push(newcard);
+    affichertask(product);
+    form.reset();
+})
