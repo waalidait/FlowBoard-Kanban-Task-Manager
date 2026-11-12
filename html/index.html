@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Document</title>
 </head>
 
@@ -16,10 +14,6 @@
         <div class="flex justify-around mt-6">
             <h1>TASK MANAGMENT</h1>
             <input type="text" class="border rounded-lg px-4 py-2" placeholder="Rechercher une tâche..." id="search">
-            
-            <button class="btn" onclick="my_modal_1.showModal()">ajouter une task</button>
-
-            
         </div>
     </header>
     <main>
@@ -32,12 +26,12 @@
             </select>
         </section>
 
-        <section class="flex justify-center items-center mt-6 hidden" id="error">
+        <section class="flex justify-center items-center mt-6">
             <div
-                class=" border border-red-300 p-6 w-7xl rounded-lg text-white  flex justify-around items-center bg-red-500">
+                class="bg-red border border-red-300 p-6 w-7xl rounded-lg text-red-700 flex justify-around items-center">
                 Il y'a une erreur dans le serveur
 
-                <button class="border p-2 rounded-lg bg-white text-red-700 px-4" id="retry">
+                <button class="border p-2 rounded-lg bg-white text-red-700 px-4">
                     <i class="fa-solid fa-rotate-right"></i> Réessayer
                 </button>
             </div>
