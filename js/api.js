@@ -1,5 +1,5 @@
  export function fetchapi(){
-     return fetch('https://flowboard-api-virid.vercel.app/cards')
+     return fetch('https://flowbard-api-virid.vercel.app/cards')
      .then(result => result.json())
  }
 
