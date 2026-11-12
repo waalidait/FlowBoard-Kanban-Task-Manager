@@ -1,10 +1,30 @@
 import { fetchapi } from "./api.js";
 let product = []
-fetchapi().then(data => {
-    product = data;
-    console.log(data)
-    affichertask(product)
+let error = document.querySelector("#error");
+let retry = document.querySelector("#retry");
+let select = document.querySelector("#select")
+let input = document.querySelector("#search")
+
+function getdata() {
+    fetchapi(select.value, input.value)
+        .then(data => {
+            product = data
+            affichertask(product)
+            error.classList.add("hidden")
+        })
+        .catch(err => {
+            error.classList.remove("hidden")
+        })
+}
+
+getdata()
+retry.addEventListener("click",function(){
+    getdata()
 })
+select.addEventListener("change", getdata)
+
+input.addEventListener("input", getdata)
+
 let todo = document.querySelector("#todo")
 let progress = document.querySelector("#in-progress")
 let done = document.querySelector("#done")
@@ -27,6 +47,7 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
+            prp.className = "bg-red-500 text-white rounded-lg px-3 py-1 w-24 text-center"
 
             let desc = document.createElement("p")
             desc.textContent = element.description
@@ -46,6 +67,7 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
+            prp.className = "bg-yellow-400 text-white rounded-lg px-3 py-1 w-24 text-center"
 
             let desc = document.createElement("p")
             desc.textContent = element.description
@@ -65,6 +87,7 @@ function affichertask(data) {
 
             let prp = document.createElement("p")
             prp.textContent = element.priority
+            prp.className = "bg-green-400 text-white rounded-lg px-3 py-1 w-24 text-center"
 
             let desc = document.createElement("p")
             desc.textContent = element.description
@@ -77,25 +100,9 @@ function affichertask(data) {
     });
 }
 
-function filter() {
-    let selcect = document.querySelector("#select")
+ 
+ 
 
-    selcect.addEventListener("change", function () {
-        let value = selcect.value
-        if(value === ""){
-            affichertask(product)
-        }
-        else{
-           let filter = product.filter(element => {
-            return element.priority === value
-        })
-        
-        affichertask(filter)
-        }
-        
+ 
 
-         
-    })
-}
-filter()
-
+ 
