@@ -1,4 +1,4 @@
-import { fetchapi } from "./api.js";
+ import { fetchapi } from "./api.js";
 let product = []
 
 let select = document.querySelector("#select")
