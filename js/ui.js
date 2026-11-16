@@ -1,9 +1,11 @@
  import { fetchapi } from "./api.js";
+
 let product = []
 
 let select = document.querySelector("#select")
 let input = document.querySelector("#search")
 let error = document.querySelector("#erreur")
+
 function getdata() {
     fetchapi(select.value, "", input.value)
         .then(data => {
@@ -15,7 +17,9 @@ function getdata() {
             error.classList.remove("hidden")
         })
 }
+
 getdata()
+
 select.addEventListener("change", getdata)
 
 input.addEventListener("input", getdata)
@@ -34,6 +38,7 @@ function affichertask(data) {
 
     data.forEach(element => {
         if (element.status === "todo") {
+            
             let card = document.createElement("div")
             card.className = "bg-white p-3 rounded-lg mt-3";
 
@@ -53,6 +58,7 @@ function affichertask(data) {
         }
 
         if (element.status === "in-progress") {
+
             let card = document.createElement("div")
             card.className = "bg-white p-3 rounded-lg mt-3";
 
