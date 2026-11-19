@@ -1,25 +1,64 @@
 
-export function fetchapi(priority = "", assignee = "", search = "") {
-    let parametre = new URLSearchParams()
+export async function fetchapi(priority = "", assignee = "", search = "") {
+    let object = {}
 
     if (priority !== "") {
-        parametre.append("priority", priority)
+        object.priority = priority
     }
 
     if (assignee !== "") {
-        parametre.append("assignee", assignee)
+        object.assignee = assignee
     }
 
     if (search !== "") {
-        parametre.append("q", search)
+        object.q = search
     }
 
-    return fetch("https://flowboard-api-virid.vercel.app/cards?" + parametre)
-        .then(result => {
-            if (!result.ok) {
-                throw new Error("Erreur serveur")
-            }
-            return result.json()
-        })
+    try {
+        const respense = await axios.get("https://flowboard-api-virid.vercel.app/cards", {
+            headers: {
+                "X-Workspace": "walid_messi"
         
+            },
+             params: object,
+             password :"1234"
+        });
+        
+        return respense.data;
+
+    }catch(error){
+     console.log("error", error);
+        throw error;
+   }
+    
 }
+
+export async function getcard(id) {
+  return await axios.get("https://flowboard-api-virid.vercel.app/cards/"+id)
+}
+
+
+
+export async function modifiercartcard(id,data) {
+  
+const options = {
+  method: 'PUT',
+  url: 'https://flowboard-api-virid.vercel.app/cards/'+id,
+  headers: {
+    "X-Workspace": 'walid_messi'
+  },
+  params:{
+     password :"1234"
+  },
+  data: data,
+ 
+}
+
+try {
+  const { data } = await axios.request(options)
+  console.log(data)
+} catch (error) {
+  console.error(error)
+}
+}
+
