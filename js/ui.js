@@ -1,13 +1,10 @@
- import { fetchapi } from "./api.js";
+import { fetchapi, getcard} from "./api.js";
 
 let product = []
+let error = document.querySelector("#erreur");
+export function getdata(priority, search) {
 
-let select = document.querySelector("#select")
-let input = document.querySelector("#search")
-let error = document.querySelector("#erreur")
-
-function getdata() {
-    fetchapi(select.value, "", input.value)
+    fetchapi(priority, "", search)
         .then(data => {
             product = data
             affichertask(product)
@@ -18,11 +15,7 @@ function getdata() {
         })
 }
 
-getdata()
-
-select.addEventListener("change", getdata)
-
-input.addEventListener("input", getdata)
+ 
 
 let todo = document.querySelector("#todo")
 let progress = document.querySelector("#in-progress")
@@ -30,7 +23,7 @@ let done = document.querySelector("#done")
 
 /*afficher les tasks*/
 
-function affichertask(data) {
+export function affichertask(data) {
 
     todo.replaceChildren();
     progress.replaceChildren();
@@ -38,7 +31,7 @@ function affichertask(data) {
 
     data.forEach(element => {
         if (element.status === "todo") {
-            
+
             let card = document.createElement("div")
             card.className = "bg-white p-3 rounded-lg mt-3";
 
@@ -51,10 +44,19 @@ function affichertask(data) {
             let desc = document.createElement("p")
             desc.textContent = element.description
 
+            let modifier = document.createElement('button')
+            modifier.className = "border p-2 modifier"
+            modifier.textContent = "modifier"
+            modifier.setAttribute("data-id", element.id)
+
+           
             card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
+            card.appendChild(modifier)
             todo.appendChild(card)
+
+          
         }
 
         if (element.status === "in-progress") {
@@ -71,10 +73,19 @@ function affichertask(data) {
             let desc = document.createElement("p")
             desc.textContent = element.description
 
+
+            let modifier = document.createElement('button')
+            modifier.className = "border p-2 modifier"
+            modifier.textContent = "modifier"
+            modifier.setAttribute("data-id", element.id)
+
             card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
+            card.appendChild(modifier)
             progress.appendChild(card)
+
+            
         }
 
         if (element.status === "done") {
@@ -89,35 +100,49 @@ function affichertask(data) {
             prp.className = "bg-green-400 text-black rounded-lg px-3 py-1 w-24 text-center"
             let desc = document.createElement("p")
             desc.textContent = element.description
+            let modifier = document.createElement('button')
+            modifier.className = "border p-2 modifier"
+            modifier.textContent = "modifier"
+            modifier.setAttribute("data-id", element.id)
 
             card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
+            card.appendChild(modifier)
             done.appendChild(card)
+
+            
         }
     });
 }
 
+export async function ouvrirModal(id) {
+
+    let { data } = await getcard(id);
+
+    my_modal_1.showModal();
+
+    my_modal_1.querySelector('[name="title"]').value = data.title;
+    my_modal_1.querySelector('[name="description"]').value = data.description;
+    my_modal_1.querySelector('[name="select"]').value = data.priority;
+    my_modal_1.querySelector('[name="name"]').value = data.assignee;
+    my_modal_1.querySelector('[name="idd"]').value = data.id;
+    my_modal_1.querySelector('[name="status"]').value = data.status;
+}
 
 
-
-let form = document.querySelector("#form-card")
-
-
-
-form.addEventListener('submit', function (e) {
+export function ajouterTask(e) {
     e.preventDefault();
 
     let newcard = {
         title: document.querySelector('#title').value,
         description: document.querySelector('#desc').value,
         priority: document.querySelector('#Priority').value,
-        name: document.querySelector('#name').value,
+       assignee: document.querySelector('#name').value,
         status: "todo"
-
     };
 
     product.push(newcard);
     affichertask(product);
-    form.reset();
-})
+    document.querySelector("#form-card").reset();
+}
