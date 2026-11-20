@@ -1,4 +1,4 @@
-import { modifiercartcard } from "./api.js";
+import { modifiercartcard,suprimmercard } from "./api.js";
 
 import {
     getdata,
@@ -6,13 +6,14 @@ import {
     ouvrirModal
 } from "./ui.js";
 
- 
+let errmodification = document.querySelector('#erreur')
+
 // Les éléments HTML
 let select = document.querySelector("#select");
 let input = document.querySelector("#search");
 let form = document.querySelector("#form-card");
 let modefier = document.querySelector("#modify");
- 
+
 
 // Afficher les tasks au démarrage
 getdata(select.value, input.value);
@@ -31,6 +32,7 @@ select.addEventListener("change", () => {
 form.addEventListener("submit", ajouterTask);
 
 // Ouvrir le modal de modification
+
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("modifier")) {
         ouvrirModal(e.target.dataset.id);
@@ -49,8 +51,27 @@ modefier.addEventListener("click", async () => {
         status: my_modal_1.querySelector('[name="status"]').value
     };
 
-    await modifiercartcard(data.id, data);
+    try {
+        await modifiercartcard(data.id, data);
+        
+    }catch (error) {
+        errmodification.classList.remove("hidden");
+        console.log(error);
+    }
 
+ 
     getdata(select.value, input.value);
 
 });
+
+//suprimer une task
+
+document.addEventListener("click", async(e)=>{
+    if(e.target.classList.contains("supprimer")){
+    console.log(e.target.dataset.id)
+    await suprimmercard(e.target.dataset.id)
+     getdata(select.value, input.value);
+    }
+         
+})
+ 

@@ -14,7 +14,7 @@ export async function fetchapi(priority = "", assignee = "", search = "") {
         object.q = search
     }
 
-    try {
+    
         const respense = await axios.get("https://flowboard-api-virid.vercel.app/cards", {
             headers: {
                 "X-Workspace": "walid_messi"
@@ -25,16 +25,17 @@ export async function fetchapi(priority = "", assignee = "", search = "") {
         });
         
         return respense.data;
-
-    }catch(error){
-     console.log("error", error);
-        throw error;
-   }
+ 
     
 }
-
 export async function getcard(id) {
-  return await axios.get("https://flowboard-api-virid.vercel.app/cards/"+id)
+     return await axios.get('https://flowboard-api-virid.vercel.app/cards/' + id, {
+        headers: {
+            "X-Workspace": 'walid_messi'
+        },
+        password: "1234"
+
+    })
 }
 
 
@@ -51,7 +52,23 @@ const options = {
      password :"1234"
   },
   data: data,
+} 
+
+}
  
+
+export async function suprimmercard(id){
+   
+
+const options = {
+  method: 'DELETE',
+  url: 'https://flowboard-api-virid.vercel.app/cards/'+id,
+  headers: {
+    "X-Workspace": 'walid_messi'
+  },
+  params:{
+     password :"1234"
+  },
 }
 
 try {
@@ -61,4 +78,3 @@ try {
   console.error(error)
 }
 }
-

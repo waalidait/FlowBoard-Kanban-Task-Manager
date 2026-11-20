@@ -49,11 +49,16 @@ export function affichertask(data) {
             modifier.textContent = "modifier"
             modifier.setAttribute("data-id", element.id)
 
-           
+            let supprimer = document.createElement('button')
+            supprimer.className = "border p-2 bg-red supprimer"
+            supprimer.textContent = "supprimer"
+            supprimer.setAttribute("data-id", element.id)
+            
             card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
             card.appendChild(modifier)
+            card.appendChild(supprimer)
             todo.appendChild(card)
 
           
@@ -79,10 +84,16 @@ export function affichertask(data) {
             modifier.textContent = "modifier"
             modifier.setAttribute("data-id", element.id)
 
+             let supprimer = document.createElement('button')
+           supprimer.className = "border p-2 bg-red supprimer"
+            supprimer.textContent = "supprimer"
+            supprimer.setAttribute("data-id", element.id)
+             
             card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
             card.appendChild(modifier)
+            card.appendChild(supprimer)
             progress.appendChild(card)
 
             
@@ -105,10 +116,16 @@ export function affichertask(data) {
             modifier.textContent = "modifier"
             modifier.setAttribute("data-id", element.id)
 
+             let supprimer = document.createElement('button')
+           supprimer.className = "border p-2 bg-red supprimer"
+            supprimer.textContent = "supprimer"
+            supprimer.setAttribute("data-id", element.id)
+          
             card.appendChild(prp)
             card.appendChild(title)
             card.appendChild(desc)
             card.appendChild(modifier)
+            card.appendChild(supprimer)
             done.appendChild(card)
 
             
@@ -146,3 +163,4 @@ export function ajouterTask(e) {
     affichertask(product);
     document.querySelector("#form-card").reset();
 }
+
